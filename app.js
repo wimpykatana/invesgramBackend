@@ -4,9 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mysql = require("mysql");
 var index = require('./routes/index');
 var users = require('./routes/users');
+var login = require('./routes/login');
+var posts = require('./routes/posts');
 
 var app = express();
 
@@ -22,8 +24,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Database connection
+app.use(function(req, res, next){
+	global.connection = mysql.createConnection({
+		host     : 'localhost',
+		user     : 'root',
+		password : 'root',
+		database : 'sosmed'
+	});
+	connection.connect();
+	next();
+});
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/login', login);
+app.use('/posts', posts);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
