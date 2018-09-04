@@ -29,7 +29,7 @@ app.use(function(req, res, next){
 	global.connection = mysql.createConnection({
 		host     : 'localhost',
 		user     : 'root',
-		password : 'root',
+		password : '',
 		database : 'sosmed'
 	});
 	connection.connect();
