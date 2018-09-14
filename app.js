@@ -88,10 +88,12 @@ function handleDisconnect() {
         }
     });
 
-    console.log("handleDisconnect");
+    console.log("Jangan di CLOSE");
 }
 
-handleDisconnect();
+//setInterval(handleDisconnect, 1000);
+
+
 
 
 module.exports = app;
